@@ -11,7 +11,7 @@ var jsfiles = ['src/js/util.js','src/js/FileSaver.js', 'src/js/screenfull.js','s
 gulp.task('concat:js', function() {
   return gulp.src(jsfiles)
     .pipe(concat('app.js'))
-    .pipe(gulp.dest('dist/'));
+    .pipe(gulp.dest('dist'));
 });
 
 gulp.task('copy:html', function() {
@@ -28,7 +28,7 @@ gulp.task('copy:lib', function() {
 gulp.task('minify:js', function() {
   return gulp.src('dist/app.js')
     .pipe(uglify())
-    .pipe(gulp.dest('dist/'));
+    .pipe(gulp.dest('dist'));
 });
 
 gulp.task('minify:css', function() {
@@ -50,6 +50,6 @@ gulp.task('connect', function() {
 
 
 gulp.task('copy', ['copy:html', 'copy:lib']);
-gulp.task('build', ['concat:js', 'copy', 'minify:css']);
+gulp.task('build', ['concat:js', 'minify:js', 'minify:css']);
 gulp.task('server', ['connect'])
 gulp.task('default', ['build', 'watch', 'server']);

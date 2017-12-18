@@ -1,32 +1,32 @@
 
-about = document.querySelector('.about');
+about = document.querySelector('.about');  //프로그램 정보
 
 var setMemo = function () {
-  document.getElementById('memo').value = '';
+  document.getElementById('memo').value = '';  //메모 초기화
 };
 
 var saveMemo = function() {
-  localStorage.text = document.getElementById('memo').value;
+  localStorage.text = document.getElementById('memo').value;  //메모내용 로컬 저장소 저장
 };
 
 
 var downloadMemo = function () {
-  var blob = new Blob([document.getElementById('memo').value], {type: "text/plain;charset=utf-8"});
+  var blob = new Blob([document.getElementById('memo').value], {type: "text/plain;charset=utf-8"}); // 메모 내용 다운로드
   saveAs(blob, "text.txt");
 };
 
 
 var displayOn = function () {
-  about.style.display = "block";
+  about.style.display = "block"; //프로그램 정보 나타내기
 };
 
 var displayOff = function() {
-  about.style.display = "none";
+  about.style.display = "none";  //프로그램 정보 안보이게 하기
 };
 
 var screenFull = function() {
   if(screenfull.enabled){
-    screenfull.request();
+    screenfull.request();       //전체 화면
   }else {
     console.log('전체화면이 안되요');
   }
@@ -397,12 +397,12 @@ saveBtn = document.querySelector('.btn-savenote');
 downloadBtn = document.querySelector('.btn-download');
 aboutBtn = document.querySelector('.btn-about');
 closeBtn = document.getElementById('close');
-fullscreenBtn = document.querySelector('.btn-fullscreen');
+fullscreenBtn = document.querySelector('.btn-fullscreen');    //버튼 객체로 가지고 오기
 
 
 
 window.onload = function (ev) {
-    text = document.getElementById('memo').value = localStorage.getItem('text');
+    text = document.getElementById('memo').value = localStorage.getItem('text');  //시작할때 이전에 저장한 내용 불러오기
 };
 
 
