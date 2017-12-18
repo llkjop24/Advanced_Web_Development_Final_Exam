@@ -18,4 +18,11 @@ saveBtn.addEventListener('click', function() {
     localStorage.text = document.getElementById('memo').value;
 })
 
+downloadBtn = document.querySelector('.btn-download');
 
+console.log(downloadBtn);
+
+downloadBtn.addEventListener('click', function() {
+  var blob = new Blob([document.getElementById('memo').value], {type: "text/plain;charset=utf-8"});
+  saveAs(blob, "hello world.txt");
+})
