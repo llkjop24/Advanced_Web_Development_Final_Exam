@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>My Note</title>
-  <link rel="stylesheet" href="css/app.css">
+  <link rel="stylesheet" href="dist\css\app.css">
 </head>
 <body>
 <div class="header">
@@ -12,6 +12,7 @@
     <button class="btn-newnote">새노트</button>
     <button class="btn-savenote">노트저장</button>
     <button class="btn-download">다운로드</button>
+    <button class="btn-fullscreen">전체화면</button>
     <button class="btn-about">about</button>
   </div>
 </div>
@@ -20,7 +21,21 @@
   <textarea id="memo" placeholder="내용을 입력하세요"></textarea>
 </div>
 
-<script src="js/app.js"></script>
-<script src="node_modules\file-saver\FileSaver.js"></script>
+<div class="about">
+    <h2>프로그램 제목 : 메모프로그램</h1>
+    <h2>개발언어 : 자바스크립트</h1>
+    <h2>만든이 : 허지원</h1>
+    <h3>버전 : 1.0</h1>
+    <button type="button" name="button" id="close">닫기</button>
+</div>
+
+
+<!-- <script src="src\js\screenfull.js"></script>
+<script src="src\js\util.js"></script>
+<script src="src\js\FileSaver.js"></script>
+<script src="src\js\app.js"></script> -->
+<script src="dist\js\all.min.js">
+
+</script>
 </body>
 </html>

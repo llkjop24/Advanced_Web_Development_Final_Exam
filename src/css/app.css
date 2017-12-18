@@ -23,3 +23,16 @@ h1 {
     width: 100%;
     height: 200px;
 }
+
+.about{
+  width: 350px;
+  height: auto;
+  margin-left: auto;
+  margin-right: auto;
+  display: none;
+}
+
+
+#close {
+  margin-left: 160px;
+}
