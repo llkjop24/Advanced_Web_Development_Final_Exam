@@ -1,43 +1,55 @@
-// Include gulp
 var gulp = require('gulp');
-
-// Include Our Plugins
-var jshint = require('gulp-jshint');
-var css = require('gulp-clean-css');
-var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
-var rename = require('gulp-rename');
+var concat = require('gulp-concat');
+var watch = require('gulp-watch');
+var cleanCSS = require('gulp-clean-css');
+var connect = require('gulp-connect');
 
-var jsfiles = ['src/js/config.js', 'src/js/util.js','src/js/view.js','src/js/FileSaver.js','src/js/app.js','src/js/screenfull.js'];
+//js 프로젝트 소스파일
+var jsfiles = ['src/js/util.js','src/js/FileSaver.js', 'src/js/screenfull.js','src/js/app.js'];
 
-// Lint Task
-gulp.task('lint', function() {
-    return gulp.src(jsfiles)
-        .pipe(jshint())
-        .pipe(jshint.reporter('default'));
+gulp.task('concat:js', function() {
+  return gulp.src(jsfiles)
+    .pipe(concat('app.js'))
+    .pipe(gulp.dest('dist/'));
 });
 
-gulp.task('css', function() {
-    return gulp.src('src/css/*.css')
-        .pipe(css())
-        .pipe(gulp.dest('dist/css'));
+gulp.task('copy:html', function() {
+  return gulp.src('index.html')
+    .pipe(connect.reload())
+    .pipe(gulp.dest(''));
 });
 
-// Concatenate & Minify JS
-gulp.task('scripts', function() {
-    return gulp.src(jsfiles)
-        .pipe(concat('all.js'))
-        .pipe(gulp.dest('dist'))
-        .pipe(rename('all.min.js'))
-        .pipe(uglify())
-        .pipe(gulp.dest('dist/js'));
+gulp.task('copy:lib', function() {
+  return gulp.src('src/lib/**/*')
+    .pipe(gulp.dest('dist/lib'));
 });
 
-// Watch Files For Changes
+gulp.task('minify:js', function() {
+  return gulp.src('dist/app.js')
+    .pipe(uglify())
+    .pipe(gulp.dest('dist/'));
+});
+
+gulp.task('minify:css', function() {
+  return gulp.src('src/css/*.css')
+    .pipe(gulp.dest('dist'));
+});
+
 gulp.task('watch', function() {
-    gulp.watch('js/*.js', ['lint', 'scripts']);
-    gulp.watch('css/*.css', ['css']);
+  gulp.watch('src/**/*', ['build']);
 });
 
-// Default Task
-gulp.task('default', ['lint', 'css', 'scripts', 'watch']);
+gulp.task('connect', function() {
+  connect.server({
+    root: '',
+    livereload: true,
+    port: 3001
+  });
+});
+
+
+gulp.task('copy', ['copy:html', 'copy:lib']);
+gulp.task('build', ['concat:js', 'copy', 'minify:css']);
+gulp.task('server', ['connect'])
+gulp.task('default', ['build', 'watch', 'server']);
